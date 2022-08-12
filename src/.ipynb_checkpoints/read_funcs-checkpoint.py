@@ -226,6 +226,13 @@ def append_new_line(file_name, text_to_append):
         file_object.write(text_to_append)
         
 def Landsat_cube(path,ts1,te1,L_bands):
+    """
+    inputs: 
+    path->path to folder containing Landsat acquisitions
+    ts1->acquisition start time 
+    te1->acquisition end time (can be found in the image title)
+    L_bands->vector containing band's numbers
+    """
     for b in L_bands:
         img=tiff.imread(path+ts1+"_"+te1+"_59_Landsat_8-9_L2_B"+b+"_(Raw).tiff")
         #matrix with index 0 is the image, while index 1 is the mask
@@ -235,3 +242,8 @@ def Landsat_cube(path,ts1,te1,L_bands):
         else:
             cube=np.dstack((cube,single_band))
     return cube
+
+def RGB_Landsat(img,R,G,B):
+    RGB=np.dstack((img[:,:,R],img[:,:,G]))
+    RGB=np.dstack((RGB,img[:,:,B]))
+    return RGB
