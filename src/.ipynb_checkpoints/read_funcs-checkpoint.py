@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from img_list import use_cases
 from PIL import Image
 import tifffile as tiff
+from find_nearest import find_nearest
 
 def read_prs_l2d(datapath, tstart, tend):
     """
@@ -167,8 +168,20 @@ def get_coord_id(path_l2d,img,tstart,tend):
 def AOI(t1,t2,vwl,long=None,lat=None,key=None,coreg=True):
     #select an AOI in which to perform CVA
     y='n'
-    rgb1 = make_rgb_dc(t1,vwl)
-    rgb2 = make_rgb_dc(t2,vwl)
+    if np.shape(t1)[2] == 230: #if it has 230 bands print PRISMA rgb
+        rgb1 = make_rgb_dc(t1,vwl)
+        rgb2 = make_rgb_dc(t2,vwl)
+    else:                      #if not it's Landsat so print Landsat rgb
+        R_idx=find_nearest(vwl,640)
+        G_idx=find_nearest(vwl,560)
+        B_idx=find_nearest(vwl,480)
+        rgb1 = RGB_Landsat(t1,R_idx,G_idx,B_idx)
+        rgb2 = RGB_Landsat(t2,R_idx,G_idx,B_idx)
+        thresh=0.18
+        rgb1[rgb1>thresh]=thresh
+        rgb1=rgb1/thresh
+        rgb2[rgb2>thresh]=thresh
+        rgb2=rgb2/thresh
     while y=='n':
         if key==None:
             xtopleft,ytopleft,xbottomright,ybottomright=input('insert the 4 indexes of the square AOI separated by a space (order: xtopleft,ytopleft,xbottomright,ybottomright): ').split() 
@@ -177,8 +190,8 @@ def AOI(t1,t2,vwl,long=None,lat=None,key=None,coreg=True):
             y='y'
         else:
             xtopleft,ytopleft=use_cases[key][3]
-            xbottomright=xtopleft+400
-            ybottomright=ytopleft+400
+            xbottomright=xtopleft+450
+            ybottomright=ytopleft+450
             y='y'
         start=[int(ytopleft),int(xtopleft)]
         end=[ int(ybottomright), int(xbottomright)]
