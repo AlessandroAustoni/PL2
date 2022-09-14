@@ -19,7 +19,7 @@ use_cases= \
 
     # ID : [[parameters_acquisition_1, parameters_acquisition_2], [AOI_coreg_topleft_x , AOI_coreg_topleft_y , AOI_coreg_bottomright_x , AOI_coreg_bottomright_y] , [AOI_cd_topleft_x , AOI_cd_topleft_y , AOI_cd_bottomright_x , AOI_cd_bottomright_y],CD_threshold,[iterations_coreg_number,[radius_coreg_1,riadius_coreg_2],rank_coreg,pyramid_coreg_levels],[bandcva_x,bandcva_y],single_difference_band]
     
-    'Po_01': [[prs_img_list['9409'],prs_img_list['30245']],[None,None,None,None],'g',[490,605],80,[8,[70,70],4,5],[560,730],760],
-    'Po_02': [[prs_img_list['9409'],prs_img_list['23623']],[None,None,None,None],'g',[550,600],90,[8,[70,70],4,5],[560,730],760], #[200,150] 550,600
-    'Land_Po_01': [[prs_img_list['L_01'],prs_img_list['L_02']],[None,None,None,None],'g',[850,1009],80,[8,[70,70],4,5],[1610,2200],760] #[700,0] 850,1009
+    'Po_01': [[prs_img_list['9409'],prs_img_list['30245']],[None,None,None,None],'g',[390,595],80,[8,[70,70],4,5],[560,730],760],
+    'Po_02': [[prs_img_list['9409'],prs_img_list['23623']],[None,None,None,None],'g',[390,605],90,[8,[70,70],4,5],[560,730],760], #[200,150] 550,600
+    'Land_Po_01': [[prs_img_list['L_01'],prs_img_list['L_02']],[None,None,None,None],'g',[500,1009],80,[8,[70,70],4,5],[1610,2200],760] #[700,0] 850,1009- 951,940 - 500,1009
     }
